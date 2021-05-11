@@ -35,6 +35,7 @@
 *.i*86
 *.x86_64
 *.hex
+lil
 
 # Debug files
 *.dSYM/
@@ -55,3 +56,5 @@ dkms.conf
 *.tab.*
 *.output
 *.yy.c
+out.c
+

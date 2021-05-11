@@ -10,6 +10,7 @@ A HolyC to C Transpiler written in C
 - Makefile: it's a Makefile
 - scanner.l: a lexer that also writes to out.c and calls gcc on it
 - randTest.HC: an included HolyC test file
+- linkedList.h: linked lists, was going to be used to make a basic symbol finder but ran out of time
 - README.md: this file that you're reading right now
 
 ## What it does
