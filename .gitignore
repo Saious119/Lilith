@@ -54,3 +54,4 @@ dkms.conf
 # Lex and Yacc
 *.tab.*
 *.output
+*.yy.c

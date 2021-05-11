@@ -13,4 +13,4 @@ lex.yy.c: scanner.l
 	$(LEX) -l scanner.l 
 
 clean:
-	rm -f lex.yy.* *.o *.output *.tab.c lil
+	rm -f lex.yy.* *.o *.output *.tab.c *.out out.c lil
