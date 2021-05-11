@@ -2,7 +2,7 @@ U0 Name(){
     Print("hi there I'm a test Holy C file\n");
     "howdy again\n";
 }
-I32 add(I32 A, I32 B){
+I32 Add(I32 A, I32 B){
     I32 C = A + B;
     "%d + %d = %d \n", A, B, C;
     return C;
@@ -16,11 +16,20 @@ Bool GT(I32 A, I32 B){
         return B;
     }
 }
-
+/*
+I0 Set(DummyInfo* info){
+    info->filename = "randTest.HC";
+    info->length = 37;
+    info->active = TRUE;
+}
+*/
 I32 main(){
     Name();
-    add(3, 5);
+    Add(3, 5);
     GT(5,3);
     Print("yo yo yo\n");
+    //DummyInfo info;
+    //Set(&info);
+    //"%s", info.filename;
     return 0;
 }

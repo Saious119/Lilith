@@ -4,6 +4,7 @@
     #include<assert.h>
     #include<unistd.h>
     #include<stdbool.h>
+    #include "linkedList.h"
     //extern "C" int yylex();
 
     int lineNum = 1;
@@ -12,6 +13,9 @@
       1 means you;ve printed the first half waiting for end, 
       2 is not a print statement
     */
+    int typedefFlag = 0; 
+    int classn = 0;
+    struct DataItem* ll;
 %}
 
 %%
@@ -29,8 +33,17 @@
 "U64" {fputs("unsigned long", yyout);}
 "F64" {fputs("double", yyout);}
 "U8" {fputs("unsigned char", yyout); isPrint = 2;}
-"class" {fputs("typedef", yyout);}
+"=" {
+    fputs("=", yyout);
+    if(isPrint == 0){
+        isPrint = 2;
+    }
+}
+"class" {fputs("typedef struct", yyout);}
 "Print" {fputs("printf", yyout);}
+"MAlloc" {fputs("malloc", yyout);}
+"CAlloc" {fputs("calloc", yyout);}
+"Free" {fputs("free", yyout);}
 "\"" {
     if(isPrint == 0){
         fputs("printf(\"", yyout);
