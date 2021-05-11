@@ -44,6 +44,14 @@
         fputs("\"", yyout);
     }
 }
+";" {
+    if(isPrint == 1){
+        fputs("", yyout);
+    }
+    else {
+        fputs(";", yyout);
+    }
+}
 "(" {fputs("(", yyout); isPrint = 2;}
 
 [A-Za-z][A-Za-z0-9]* {fputs(yytext, yyout);}
