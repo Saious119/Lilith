@@ -89,7 +89,7 @@ int main(){
     char cmd[10] = "gcc out.c";
     int status = system(cmd);
     if(status != 0){
-        fprintf(stderr, "execvp exited with status: %d \n", status);
+        fprintf(stderr, "Failed to compile out.c \n execvp exited with status: %d \n", status);
         exit(-1);
     }
     fprintf(stderr, "File successfully compiled to a.out \n");
