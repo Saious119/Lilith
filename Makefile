@@ -1,7 +1,8 @@
 CC = clang
 LEX = flex
 FLAGS = -g -c
-LIBS = -lfl -ly
+LIBS = -lfl
+
 
 lil: lex.yy.o 
 	$(CC) -g -o lil lex.yy.o $(LIBS)
