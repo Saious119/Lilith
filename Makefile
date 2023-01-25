@@ -2,7 +2,12 @@ CC = clang
 LEX = flex
 FLAGS = -g -c
 LIBS = -lfl
+UNAME := $(shell uname)
 
+
+ifeq ($(UNAME), Darwin)
+	LIBS = -ll 
+endif 
 
 lil: lex.yy.o 
 	$(CC) -g -o lil lex.yy.o $(LIBS)
