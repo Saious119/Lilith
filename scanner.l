@@ -45,12 +45,11 @@
 "MAlloc" {fputs("malloc", yyout);}
 "CAlloc" {fputs("calloc", yyout);}
 "Free" {fputs("free", yyout);}
-"#include\"" {fputs("#include<", yyout); isInclude =1;}
+"#include \"" {
+    fputs("#include \"", yyout);
+    isPrint =3;
+}
 "\"" {
-    if(isInclude == 1){
-        fputs(">", yyout);
-        isInclude = 0;
-    }
     if(isPrint == 0){
         fputs("printf(\"", yyout);
         //yymore();
@@ -105,7 +104,7 @@ int main(){
     yylex();
     fclose(yyout);
     fprintf(stderr, "Translation complete, now compiling\n");
-    char cmd[11] = "clang out.c";
+    char cmd[12] = "clang out.c";
     int status = system(cmd);
     if(status != 0){
         fprintf(stderr, "Failed to compile out.c \n execvp exited with status: %d \n", status);
