@@ -12,6 +12,7 @@
     /*0 means the line is a print statement, 
       1 means you;ve printed the first half waiting for end, 
       2 is not a print statement
+      3 is a #include "file.hc" statement 
     */
     int typedefFlag = 0; 
     int classn = 0;
@@ -71,6 +72,12 @@
     }
 }
 "(" {fputs("(", yyout); isPrint = 2;}
+[A-Za-z0-9]*".HC$" {
+    fputs(yytext, yyout);
+    fputs(".c", yyout);
+    insert(yytext);
+}
+
 
 [A-Za-z][A-Za-z0-9]* {fputs(yytext, yyout);}
 [0-9]+ {fputs(yytext, yyout);}
@@ -94,21 +101,30 @@ int yyerror(char* msg){
     exit(2);
 }
 
-int main(){
+int main(int argc, char** argv){
+    extern FILE *yyin;
     extern FILE *yyout; 
-    yyout = fopen("out.c", "w+");
+    yyin = fopen(argv[1], "r");
+    yyout = fopen(argv[2], "w+");
     fputs("#include<stdio.h>\n", yyout);
     fputs("#include<stdlib.h>\n", yyout);
     fputs("#include<string.h>\n", yyout);
     fputs("#include<stdbool.h>\n", yyout);
     yylex();
-    fclose(yyout);
+    fclose(yyin);
+    //fclose(yyout);
     fprintf(stderr, "Translation complete, now compiling\n");
-    char cmd[12] = "clang out.c";
+    char cmd[30] = "clang ";
+    //int argv3Size = sizeof(argv[3]);
+    strcat(cmd, argv[2]);
+    strcat(cmd, " -o ");
+    strcat(cmd, argv[3]);
+    fprintf(stderr, "%s \n", cmd);
     int status = system(cmd);
     if(status != 0){
         fprintf(stderr, "Failed to compile out.c \n execvp exited with status: %d \n", status);
         exit(-1);
     }
-    fprintf(stderr, "File successfully compiled to a.out \n");
+    fprintf(stderr, "File successfully compiled to %s \n", argv[3]);
+    return 0;
 }

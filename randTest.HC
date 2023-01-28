@@ -1,3 +1,5 @@
+//#include "anotherFile.HC"
+
 U0 Name(){
     Print("hi there I'm a test Holy C file\n");
     "howdy again\n";
@@ -31,5 +33,6 @@ I32 main(){
     //DummyInfo info;
     //Set(&info);
     //"%s", info.filename;
+    //PrintHi();
     return 0;
 }
